@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chat Simple</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="login">
+    <input type="text" id="username" placeholder="Entrez votre prénom" />
+    <button onclick="login()">Rejoindre</button>
+  </div>
+
+  <div id="chat" class="hidden">
+    <div id="messages"></div>
+    <form id="form">
+      <input type="text" id="input" placeholder="Votre message..." />
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
+
+  <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  // Config locale de l'extension Prettier
+  "prettier.semi": true,
+  "prettier.singleQuote": true,
+  "prettier.printWidth": 100,
+  "prettier.tabWidth": 2,
+  "prettier.arrowParens": "always",
+  "prettier.bracketSpacing": true,
+  "prettier.endOfLine": "auto",
+  // Config locale du projet (remplace la config globale)
+  //turboConsoleLog.logMessagePrefix": "[DEBUG] Project",
+  "turboConsoleLog.includeLineNum": true,
+  "turboConsoleLog.addSemicolonInTheEnd": true,
+  "turboConsoleLog.includeFilename": true,
+}

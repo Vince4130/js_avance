@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Shared Worker Example</h2>
+<button onclick="sendMessage()">Envoyer au shared worker</button>
+<p id="result"></p>
+
+<script>
+let workerPort;
+
+// Création du worker partagé
+const worker = new SharedWorker("shared-worker.js");
+
+workerPort = worker.port;
+
+workerPort.start(); // Nécessaire pour les messages manuels
+
+workerPort.onmessage = function(event) {
+    document.getElementById("result").innerText = event.data;
+};
+
+function sendMessage() {
+    workerPort.postMessage("Hello depuis le client !");
+}
+</script>
+</body>
+</html>

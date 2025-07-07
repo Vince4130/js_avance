@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Async/Await - Utilisateurs & Posts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #loader {
+      color: gray;
+      font-style: italic;
+    }
+    .post {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      background-color: #f9f9f9;
+      margin-top: 5px;
+      padding: 5px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Utilisateurs & Posts</h1>
+
+  <label for="userSelect">Sélectionnez un utilisateur :</label>
+  <select id="userSelect">
+    <option value="">-- Sélectionnez --</option>
+  </select>
+
+  <div id="loader">Chargement en cours...</div>
+
+  <div id="content"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

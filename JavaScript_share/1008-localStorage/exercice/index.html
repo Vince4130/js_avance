@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>localStorage Explorer</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      h2 {
+        margin-top: 40px;
+      }
+
+      .section {
+        margin-bottom: 30px;
+        border: 1px solid #ccc;
+        padding: 15px;
+        border-radius: 8px;
+      }
+
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+
+      input[type='text'] {
+        width: 100%;
+        padding: 6px;
+        margin-top: 5px;
+        box-sizing: border-box;
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 6px 12px;
+        cursor: pointer;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+      }
+
+      th,
+      td {
+        border: 1px solid #aaa;
+        padding: 8px;
+        text-align: left;
+      }
+
+      tr:hover {
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Documentation -->
+    <div class="section">
+      <h2>Documentation : Méthodes localStorage</h2>
+      <ul>
+        <li>
+          <strong>localStorage.setItem(key, value)</strong> : Enregistre une paire clé/valeur.
+        </li>
+        <li><strong>localStorage.getItem(key)</strong> : Récupère la valeur associée à une clé.</li>
+        <li>
+          <strong>localStorage.removeItem(key)</strong> : Supprime l'élément correspondant à la clé.
+        </li>
+        <li><strong>localStorage.clear()</strong> : Supprime toutes les données stockées.</li>
+        <li>
+          <strong>localStorage.length</strong> : Retourne le nombre d'éléments (paires clé/valeur)
+          stockés dans le localStorage.
+        </li>
+
+        <li>
+          <strong>localStorage.key(i)</strong> : Retourne la clé à l'indice <code>i</code>. Utile
+          pour parcourir toutes les clés du localStorage.
+        </li>
+      </ul>
+    </div>
+
+    <!-- setItem -->
+    <div class="section">
+      <h2>Ajouter une donnée (localStorage.setItem)</h2>
+      <label for="keyInput">Clé (key) :</label>
+      <input type="text" id="keyInput" placeholder="Entrez une clé (ex: nom, theme, etc.)" />
+
+      <label for="valueInput">Valeur (value) :</label>
+      <input type="text" id="valueInput" placeholder="Entrez une valeur" />
+
+      <button onclick="saveCustomData()">Sauvegarder</button>
+    </div>
+
+    <!-- removeItem -->
+    <div class="section">
+      <h2>Supprimer une donnée (localStorage.removeItem)</h2>
+      <label for="removeKeyInput">Clé à supprimer :</label>
+      <input type="text" id="removeKeyInput" placeholder="Entrez la clé à supprimer" />
+
+      <button onclick="deleteCustomData()">Supprimer</button>
+    </div>
+
+    <!-- clear -->
+    <div class="section">
+      <h2>Effacer toutes les données</h2>
+      <button onclick="clearLocalStorage()" style="color: red">Tout supprimer</button>
+    </div>
+
+    <!-- Affichage du localStorage -->
+    <div class="section">
+      <h2>Données actuelles dans localStorage 🧾</h2>
+      <button onclick="refreshTable()">🔄 Rafraîchir</button>
+      <table id="storageTable">
+        <thead>
+          <tr>
+            <th>Clé (key)</th>
+            <th>Valeur (value)</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

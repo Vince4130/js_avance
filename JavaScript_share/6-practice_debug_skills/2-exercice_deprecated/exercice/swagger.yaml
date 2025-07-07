@@ -1,0 +1,164 @@
+openapi: 3.0.3
+info:
+  title: API Gestion des Réservations de Salles
+  description: Une API REST simple permettant de gérer la réservation de salles, en évitant les chevauchements horaires.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+    description: Serveur local de développement
+tags:
+  - name: Réservations
+    description: Gestion des réservations de salles
+paths:
+  /reservations:
+    get:
+      tags:
+        - Réservations
+      summary: Liste toutes les réservations
+      description: Retourne la liste complète des réservations enregistrées.
+      responses:
+        '200':
+          description: Liste des réservations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reservation'
+    post:
+      tags:
+        - Réservations
+      summary: Créer une nouvelle réservation
+      description: Ajoute une nouvelle réservation si les champs sont valides et qu'il n'y a pas de conflit horaire.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationInput'
+      responses:
+        '201':
+          description: Réservation créée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+        '400':
+          description: Données invalides ou chevauchement horaire
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /reservations/verifier:
+    post:
+      tags:
+        - Réservations
+      summary: Vérifie si une salle est disponible à une date donnée
+      description: Teste si une salle est libre pendant un créneau donné.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerificationInput'
+      responses:
+        '200':
+          description: Statut de disponibilité
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Disponibilite'
+        '400':
+          description: Données invalides
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /reservations/{id}:
+    delete:
+      tags:
+        - Réservations
+      summary: Supprime une réservation par ID
+      description: Supprime une réservation existante si l'ID est valide.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Identifiant de la réservation à supprimer
+      responses:
+        '204':
+          description: Réservation supprimée avec succès
+        '404':
+          description: Réservation non trouvée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: integer
+        salle:
+          type: string
+        debut:
+          type: string
+          format: date-time
+        fin:
+          type: string
+          format: date-time
+        utilisateur:
+          type: string
+      required:
+        - id
+        - salle
+        - debut
+        - fin
+        - utilisateur
+    ReservationInput:
+      type: object
+      properties:
+        salle:
+          type: string
+        debut:
+          type: string
+          format: date-time
+        fin:
+          type: string
+          format: date-time
+        utilisateur:
+          type: string
+      required:
+        - salle
+        - debut
+        - fin
+        - utilisateur
+    VerificationInput:
+      type: object
+      properties:
+        salle:
+          type: string
+        debut:
+          type: string
+          format: date-time
+        fin:
+          type: string
+          format: date-time
+      required:
+        - salle
+        - debut
+        - fin
+    Disponibilite:
+      type: object
+      properties:
+        disponible:
+          type: boolean
+    Error:
+      type: object
+      properties:
+        error:
+          type: string

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exercice IndexedDB - Carnet d'adresses</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      h2 {
+        margin-top: 40px;
+      }
+
+      .section {
+        margin-bottom: 30px;
+        border: 1px solid #ccc;
+        padding: 15px;
+        border-radius: 8px;
+      }
+
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+
+      input[type='text'] {
+        width: 100%;
+        padding: 6px;
+        margin-top: 5px;
+        box-sizing: border-box;
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 6px 12px;
+        cursor: pointer;
+      }
+
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      li {
+        margin: 5px 0;
+        padding: 8px;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+      }
+
+      .delete-btn {
+        color: red;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Documentation -->
+    <div class="section">
+      <h2>Documentation IndexedDB</h2>
+      <ul>
+        <li><strong>indexedDB.open(nom, version)</strong> : Ouvre ou crée une base de données.</li>
+        <li>
+          <strong>onupgradeneeded</strong> : Déclenché si la base n’existe pas ou si la version
+          change.
+        </li>
+        <li><strong>createObjectStore()</strong> : Crée un magasin d’objets (table).</li>
+        <li><strong>add(objet)</strong> : Ajoute un objet au magasin.</li>
+        <li><strong>getAll()</strong> : Récupère tous les objets du magasin.</li>
+        <li><strong>get(id)</strong> : Récupère un objet selon son ID.</li>
+        <li><strong>delete(id)</strong> : Supprime un objet selon son ID.</li>
+        <li>
+          <strong>openCursor()</strong> : Parcours les données avec un curseur (utile pour les
+          recherches).
+        </li>
+      </ul>
+      <p>
+        <strong>Note :</strong> IndexedDB permet de stocker des données complexes et persistantes.
+        Il est asynchrone et utilise des requêtes et des transactions.
+      </p>
+    </div>
+
+    <!-- Formulaire d'ajout -->
+    <div class="section">
+      <h2>Ajouter un contact</h2>
+      <label for="nameInput">Nom :</label>
+      <input type="text" id="nameInput" placeholder="Entrez un nom" />
+
+      <label for="emailInput">Email :</label>
+      <input type="text" id="emailInput" placeholder="Entrez un email" />
+
+      <button onclick="addContact()">Ajouter</button>
+      <button onclick="loadContacts()">🔄 Rafraîchir</button>
+    </div>
+
+    <!-- Supprimer un contact -->
+    <div class="section">
+      <h2>Supprimer un contact</h2>
+      <label for="idToDelete">ID du contact à supprimer :</label>
+      <input type="text" id="idToDelete" placeholder="Entrez l'ID du contact" />
+
+      <button onclick="deleteContactById()">❌ Supprimer</button>
+    </div>
+
+    <!-- Rechercher un contact par nom -->
+    <div class="section">
+      <h2>Rechercher par nom</h2>
+      <label for="searchByName">Nom :</label>
+      <input type="text" id="searchByName" placeholder="Entrez un nom..." />
+
+      <button onclick="searchByName()">🔍 Rechercher par nom</button>
+
+      <h2>Liste des contacts trouvé</h2>
+      <ul id="contactListByName"></ul>
+    </div>
+
+    <!-- Rechercher un contact par email -->
+    <div class="section">
+      <h2>Rechercher par email</h2>
+      <label for="searchByEmail">Email :</label>
+      <input type="text" id="searchByEmail" placeholder="Entrez un email..." />
+
+      <button onclick="searchByEmail()">🔍 Rechercher par email</button>
+      <h2>Liste des contacts trouvé</h2>
+      <ul id="contactListByEmail"></ul>
+    </div>
+
+    <!-- Liste des contacts -->
+    <div class="section">
+      <h2>Liste des contacts</h2>
+      <ul id="contactList"></ul>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

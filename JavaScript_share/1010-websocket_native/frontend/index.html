@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chat WebSocket Pur</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    #messages {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+    }
+
+    button {
+      padding: 10px 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Chat WebSocket</h1>
+
+  <div id="messages"></div>
+
+  <form id="chat-form">
+    <input type="text" id="message-input" placeholder="Votre message..." required />
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <script>
+    // Connexion au serveur WebSocket
+    const socket = new WebSocket("ws://localhost:3000");
+
+    const messagesDiv = document.getElementById("messages");
+    const form = document.getElementById("chat-form");
+    const input = document.getElementById("message-input");
+
+    // Quand la connexion est établie
+    socket.addEventListener("open", () => {
+      addMessage("<i>Connecté au serveur</i>");
+    });
+
+    // Réception d'un message
+    socket.addEventListener("message", (event) => {
+      addMessage(`<b>Serveur :</b> ${event.data}`);
+    });
+
+    // Envoi d’un message au serveur
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const message = input.value.trim();
+      if (message !== "") {
+        socket.send(message);
+        addMessage(`<b>Vous :</b> ${message}`);
+        input.value = "";
+      }
+    });
+
+    // Fonction pour ajouter un message à l’écran
+    function addMessage(text) {
+      const div = document.createElement("div");
+      div.innerHTML = text;
+      messagesDiv.appendChild(div);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+  </script>
+</body>
+</html>

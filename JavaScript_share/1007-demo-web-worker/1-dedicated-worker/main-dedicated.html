@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Dedicated Worker Example</h2>
+<button onclick="startWorker()">Lancer le calcul</button>
+<p id="result"></p>
+
+<script>
+let worker;
+
+function startWorker() {
+    if (typeof worker === "undefined") {
+        worker = new Worker("dedicated-worker.js");
+    }
+
+    worker.postMessage({ count: 100000000 }); // Envoie un message au worker
+
+    worker.onmessage = function(event) {
+        document.getElementById("result").innerText = event.data;
+    };
+}
+</script>
+</body>
+</html>
