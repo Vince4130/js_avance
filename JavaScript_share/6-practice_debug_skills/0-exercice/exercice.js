@@ -8,7 +8,7 @@
 function calculerMoyennePonderee(notes, coefficients) {
   if (notes.length !== coefficients.length) {
     console.error('Les tableaux doivent avoir la même longueur.');
-    return;
+    return null;
   }
 
   let sommeNotes = 0;
@@ -17,6 +17,11 @@ function calculerMoyennePonderee(notes, coefficients) {
   for (let i = 0; i < notes.length; i++) {
     sommeNotes += notes[i] * coefficients[i];
     sommeCoefficients += coefficients[i];
+  }
+
+  if (sommeCoefficients === 0) {
+    console.error('Les coefficients ne doivent pas être nuls.');
+    return null;
   }
 
   let moyenne = sommeNotes / sommeCoefficients;

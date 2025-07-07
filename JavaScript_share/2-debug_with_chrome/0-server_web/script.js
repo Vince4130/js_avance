@@ -7,6 +7,7 @@ function onClick() {
 }
 
 function inputsAreEmpty() {
+  //debugger;
   if (getNumber1() === '' || getNumber2() === '') {
     return true;
   } else {
