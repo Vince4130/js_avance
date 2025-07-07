@@ -13,13 +13,13 @@ const utilisateur = {
 
 // je veux appeler la méthode saluer après 1 seconde
 // et je veux que la console affiche "Bonjour, je suis Julien"
-setTimeout(utilisateur.saluer, 1000);
+setTimeout(utilisateur.saluer.bind(utilisateur), 1000);
 
 
 const utilisateur2 = {
   nom: "Julien",
   saluer: () => {
-    console.log("Bonjour, je suis " + this.nom + " (arrow function)");
+    console.log("Bonjour, je suis " + utilisateur2.nom + " (arrow function)");
   }
 };
 // je veux appeler la méthode saluer après 1 seconde

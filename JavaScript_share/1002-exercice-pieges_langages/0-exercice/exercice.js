@@ -2,17 +2,21 @@
     * Exercice : Pièges en JavaScript
     * Objectif : Identifier et corriger les pièges courants en JavaScript.
     * Niveau : Intermédiaire
-    * Description : Cet exercice met en évidence des pièges courants en JavaScript, tels que la portée des variables, l'utilisation de `this`, et les conversions de types.
+    * Description : Cet exercice met en évidence des pièges courants en JavaScript, tels que la portée des letiables, l'utilisation de `this`, et les conversions de types.
 */
 
 function afficherInfos() {
   nom = "Alice";
-  var age = "30";
-  console.log("Avant conversion:", age + 5);
+  let age = "30";
+
+  let ville = "Paris";
+  let pays  = "France";
+
+  console.log("Avant conversion:", Number(age) + 5);
 
   if (true) {
-    var ville = "Paris";
-    let pays = "France";
+    let ville = "Paris";
+    let pays  = "France";
   }
 
   console.log("Ville:", ville);
