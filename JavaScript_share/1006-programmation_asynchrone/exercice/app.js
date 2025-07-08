@@ -3,6 +3,12 @@ async function loadUsers() {
   const select = document.getElementById("userSelect");
   try {
 
+    const apiResponse = await fetch('https://jsonplaceholder.typicode.com/users');
+
+    //const data = await apiResponse;
+    const users = await apiResponse.json();
+    
+    /*
     const users = [
       { id: 1, name: "Leanne Graham" },
       { id: 2, name: "Ervin Howell" },
@@ -15,6 +21,8 @@ async function loadUsers() {
       { id: 9, name: "Glenna Reichert" },
       { id: 10, name: "Clementina DuBuque" }
     ]
+    */
+
 
     users.forEach(user => {
       const option = document.createElement("option");
@@ -30,11 +38,14 @@ async function loadUsers() {
 // Fonction pour charger les posts d’un utilisateur
 async function loadPosts(userId) {
   try {
-    return [
-      { id: 1, userId: userId, title: "Post 1", body: "Contenu du post 1" },
+
+    const apiResponse = await fetch('https://jsonplaceholder.typicode.com/posts?userId=' + userId);
+    return await apiResponse.json();
+   /*return [
+      { id: posts.id, userId: posts.userId, title: posts.title, body: posts.body },
       { id: 2, userId: userId, title: "Post 2", body: "Contenu du post 2" },
       { id: 3, userId: userId, title: "Post 3", body: "Contenu du post 3" }
-    ]
+    ]*/
   } catch (error) {
     throw new Error("Erreur posts : " + error.message);
   }
@@ -43,12 +54,13 @@ async function loadPosts(userId) {
 // Fonction pour charger les commentaires d’un post
 async function loadComments(postId) {
   try {
-
-    return comments = [
+    const apiResponse = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`);
+    return await apiResponse.json();
+    /*return comments = [
       { id: 1, postId: postId, name: "Commentaire 1", body: "Contenu du commentaire 1" },
       { id: 2, postId: postId, name: "Commentaire 2", body: "Contenu du commentaire 2" },
       { id: 3, postId: postId, name: "Commentaire 3", body: "Contenu du commentaire 3" }
-    ]
+    ]*/
     
   } catch (error) {
     throw new Error("Erreur commentaires : " + error.message);
