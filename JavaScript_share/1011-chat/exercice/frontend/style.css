@@ -10,7 +10,7 @@ body {
 #messages {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  row-gap: 5px;
   height: 300px;
   overflow-y: auto;
   border: 1px solid #ccc;
@@ -20,12 +20,14 @@ body {
 
 #messages > div:nth-child(2n) {
   text-align: right;
-  background-color:deepskyblue;
+  padding-right: 10px;
+  color:deepskyblue;
 }
 
 #messages > div:nth-child(2n+1) {
   text-align: left;
-  background-color: deeppink;
+  padding-left: 10px;
+  color: deeppink;
 }
 .hidden {
   display: none;
